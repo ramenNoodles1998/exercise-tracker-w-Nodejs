@@ -8,15 +8,15 @@ router.route('/').get((req,res)=>{
 })
 
 router.route('/add').post((req,res)=>{
-    const username = req.body.username
-    const description = req.body.description
-    const duration = Number(req.body.duration)
+    const workout = req.body.workout
+    const reps = Number(req.body.reps)
+    const weight = Number(req.body.weight)
     const date = Date.parse(req.body.date)
 
     const newExercise = new Exercise({
-        username,
-        description,
-        duration,
+        workout,
+        reps,
+        weight,
         date
     })
     newExercise.save()
@@ -39,9 +39,9 @@ router.route('/:id').delete((req,res)=>{
 router.route('/update/:id').post((req,res)=>{
     Exercise.findById(req.params.id)
     .then(exercise=>{
-        exercise.username = req.body.username
-        exercise.description = req.body.description
-        exercise.duration = Number(req.body.duration)
+        exercise.workout = req.body.workout
+        exercise.reps = Number(req.body.reps)
+        exercise.weight = Number(req.body.weight)
         exercise.date = Date(req.body.date)
 
         exercise.save()

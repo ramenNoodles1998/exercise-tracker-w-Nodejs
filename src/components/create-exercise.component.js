@@ -7,47 +7,47 @@ export default class CreateExercise extends Component{
     constructor(props){
         super(props)
 
-        this.onChangeUsername = this.onChangeUsername.bind(this)
-        this.onChangeDescription = this.onChangeDescription.bind(this)
-        this.onChangeDuration = this.onChangeDuration.bind(this)
+        this.onChangeWorkout = this.onChangeWorkout.bind(this)
+        this.onChangeReps = this.onChangeReps.bind(this)
+        this.onChangeWeight = this.onChangeWeight.bind(this)
         this.onChangeDate = this.onChangeDate.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
 
         this.state={
-            username: '',
-            description: '',
-            duration: 0,
+            workout: '',
+            reps: '',
+            weight: 0,
             date: new Date(),
-            users: []
+            workouts: []
         }
 
     }
 
     componentDidMount(){
-        axios.get('http://localhost:5000/users/')
+        axios.get('http://localhost:5000/workouts/')
         .then(res => {
             if(res.data.length>0){
                 this.setState({
-                    users: res.data.map(user=>user.username),
-                    username: res.data[0].username
+                    workouts: res.data.map(workout=>workout.workout),
+                    workout: res.data[0].workout
                 })
             }
         })
     }
 
-    onChangeUsername(e){
+    onChangeWorkout(e){
         this.setState({
-            username: e.target.value
+            workout: e.target.value
         })
     }
-    onChangeDescription(e){
+    onChangeReps(e){
         this.setState({
-            description: e.target.value
+            reps: e.target.value
         })
     }
-    onChangeDuration(e){
+    onChangeWeight(e){
         this.setState({
-            duration: e.target.value
+            weight: e.target.value
         })
     }
     onChangeDate(date){
@@ -59,9 +59,9 @@ export default class CreateExercise extends Component{
         e.preventDefault()
 
         const exercise = {
-            username: this.state.username,
-            description: this.state.description,
-            duration: this.state.duration,
+            workout: this.state.workout,
+            reps: this.state.reps,
+            weight: this.state.weight,
             date: this.state.date
         }
 
@@ -78,42 +78,42 @@ export default class CreateExercise extends Component{
                 <h3>Create new Exercise Log</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Username: </label>
+                        <label>Workout: </label>
                         <select
                             ref="userInput"
                             required
                             className="form-control"
-                            value={this.state.username}
-                            onChange={this.onChangeUsername}
+                            value={this.state.workout}
+                            onChange={this.onChangeWorkout}
                         >{
-                            this.state.users.map(function(user){
+                            this.state.workouts.map(function(workout){
                                 return <option 
-                                    key ={user}
-                                    value ={user}>{user}
+                                    key ={workout}
+                                    value ={workout}>{workout}
                                     </option>
                             })
                         }</select>
 
                     </div>
                     <div className="form-group">
-                        <label>Description: </label>
+                        <label>Reps: </label>
                         <input
                             type="text"
                             required
                             className="form-control"
-                            value={this.state.description}
-                            onChange={this.onChangeDescription}
+                            value={this.state.reps}
+                            onChange={this.onChangeReps}
                             />
 
                     </div>
                     <div className="form-group">
-                        <label>Duration(in minutes): </label>
+                        <label>Weight(lbs): </label>
                         <input
                             type="text"
                             required
                             className="form-control"
-                            value={this.state.duration}
-                            onChange={this.onChangeDuration}
+                            value={this.state.weight}
+                            onChange={this.onChangeWeight}
                             />
 
                     </div>

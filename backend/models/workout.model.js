@@ -2,18 +2,18 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const userSchema = new Schema({
-    username: {
+const workoutSchema = new Schema({
+    workout: {
         type: String,
         required: true,
         unique: true,
-        trim: true,
-        minlength: 3
+        trim: true
+        
     },
 },{
     timestamps: true
 })
 
-const User = mongoose.model('User', userSchema)
+const Workout = mongoose.model('Workout', workoutSchema)
 
-module.exports = User
+module.exports = Workout
