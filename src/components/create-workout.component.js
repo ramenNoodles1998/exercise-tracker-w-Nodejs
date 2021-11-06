@@ -58,7 +58,6 @@ export default class CreateWorkout extends Component{
                     <div>
                         <input type="submit" value="Create Workout" className ="btn btn-dark"/>
                     </div>
-
                 </form>
             </div>
         )
